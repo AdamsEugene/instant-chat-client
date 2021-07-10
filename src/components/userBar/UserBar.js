@@ -41,8 +41,8 @@ export default function UserBar({ currentUser, user, active, dic }) {
             alignItems="flex-start"
             onClick={(e) =>
               typeof user === "string"
-                ? currentUser(user, true)
-                : currentUser(user, false)
+                ? currentUser(e, user, true)
+                : currentUser(e, user, false)
             }
           >
             <ListItemAvatar>
@@ -66,7 +66,7 @@ export default function UserBar({ currentUser, user, active, dic }) {
                         className={classes.inline}
                         color="textPrimary"
                       >
-                        typing... 
+                        typing...
                       </Typography>
                       recent message
                     </>

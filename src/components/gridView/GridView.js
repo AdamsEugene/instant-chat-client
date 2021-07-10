@@ -166,7 +166,9 @@ export default function GridView({ toggleRightSideBar, barState }) {
     setSearch("");
   };
 
-  const currentUser = async (user, group) => {
+  const currentUser = async (e, user, group) => {
+    e.preventDefault();
+    if ((user._id !== c_user) && !group) setMessages([]);
     setC_user(user);
     // await getAllMessages(id);
 
@@ -180,7 +182,6 @@ export default function GridView({ toggleRightSideBar, barState }) {
     } else {
       setGroupName("");
       setGroupMembers([]);
-      setMessages([]);
       const allMessages = await instance.get(
         `/chat/all/${location.pathname.split("/").slice(1)[0]}/${user._id}`
       );
