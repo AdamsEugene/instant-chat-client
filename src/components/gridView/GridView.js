@@ -182,7 +182,7 @@ export default function GridView({ toggleRightSideBar, barState }) {
       setGroupMembers([]);
       setMessages([]);
       const allMessages = await instance.get(
-        `/chat/all/${location.pathname.split("/").slice(1)[0]}/${c_user._id}`
+        `/chat/all/${location.pathname.split("/").slice(1)[0]}/${user._id}`
       );
       setMessages([...allMessages.data]);
     }
