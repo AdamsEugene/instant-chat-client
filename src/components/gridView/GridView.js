@@ -181,11 +181,10 @@ export default function GridView({ toggleRightSideBar, barState }) {
       setGroupName("");
       setGroupMembers([]);
       setMessages([]);
-      // const ourChat = allMyMessages.filter(
-      //   (message) =>
-      //     message.receiverId === user._id || message.senderId === user._id
-      // );
-      // setMessages([...ourChat]);
+      const allMessages = await instance.get(
+        `/chat/all/${location.pathname.split("/").slice(1)[0]}/${c_user._id}`
+      );
+      setMessages([...allMessages.data]);
     }
 
     console.log(c_user);
