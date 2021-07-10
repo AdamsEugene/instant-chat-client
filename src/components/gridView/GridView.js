@@ -36,10 +36,12 @@ export default function GridView({ toggleRightSideBar, barState }) {
 
   useEffect(() => {
     socket = io(ENDPORTURL, { transports: ["websocket"], upgrade: false });
-    setId(location.pathname.split("/").slice(1)[0])
+    setId(location.pathname.split("/").slice(1)[0]);
 
     const getUser = async () => {
-      const newUser = await instance.get(`/user/get/${location.pathname.split("/").slice(1)[0]}`);
+      const newUser = await instance.get(
+        `/user/get/${location.pathname.split("/").slice(1)[0]}`
+      );
       setUser(newUser.data);
       await socket.emit("login", newUser.data, () => {});
     };
@@ -70,7 +72,9 @@ export default function GridView({ toggleRightSideBar, barState }) {
   console.log(allUsers);
 
   const getAllMessages = async (id) => {
-    const allMessages = await instance.get(`/chat/all/${location.pathname.split("/").slice(1)[0]}`);
+    const allMessages = await instance.get(
+      `/chat/all/${location.pathname.split("/").slice(1)[0]}`
+    );
     setAllMyMessages([...allMessages.data]);
   };
 
@@ -106,7 +110,9 @@ export default function GridView({ toggleRightSideBar, barState }) {
   // messages receive
   useEffect(() => {
     socket.on("message", async (message) => {
-      const allMessages = await instance.get(`/chat/all/${location.pathname.split("/").slice(1)[0]}`);
+      const allMessages = await instance.get(
+        `/chat/all/${location.pathname.split("/").slice(1)[0]}`
+      );
       setMessages([...allMessages.data]);
     });
   }, []);
@@ -174,6 +180,7 @@ export default function GridView({ toggleRightSideBar, barState }) {
     } else {
       setGroupName("");
       setGroupMembers([]);
+      setMessages([]);
       const ourChat = allMyMessages.filter(
         (message) =>
           message.receiverId === user._id || message.senderId === user._id
