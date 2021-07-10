@@ -24,7 +24,7 @@ export default function ButtonsTemp({ mg, hadleSubmitDetails }) {
   const classes = useStyles();
 
   const register = async () => (
-   window.location.assign("http://localhost:9000/auth/google")
+   window.location.assign("https://instantchat-server.herokuapp.com/auth/google")
   );
 
   return (
