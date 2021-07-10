@@ -53,7 +53,7 @@ export default function GridView({ toggleRightSideBar, barState }) {
       const allusers = await instance.get("/user/allactiveuser");
       setActiveUsers([...allusers.data]);
 
-      await getAllMessages(id);
+      // await getAllMessages(id);
 
       const all_Chat_Groups = await instance.get("/user/allgroups");
       setAllChatGroups([...all_Chat_Groups.data]);
@@ -71,12 +71,12 @@ export default function GridView({ toggleRightSideBar, barState }) {
 
   console.log(allUsers);
 
-  const getAllMessages = async (id) => {
-    const allMessages = await instance.get(
-      `/chat/all/${location.pathname.split("/").slice(1)[0]}`
-    );
-    setAllMyMessages([...allMessages.data]);
-  };
+  // const getAllMessages = async (id) => {
+  //   const allMessages = await instance.get(
+  //     `/chat/all/${location.pathname.split("/").slice(1)[0]}`
+  //   );
+  //   setAllMyMessages([...allMessages.data]);
+  // };
 
   useEffect(() => {
     socket.on("someone", async (some1) => {
@@ -111,7 +111,7 @@ export default function GridView({ toggleRightSideBar, barState }) {
   useEffect(() => {
     socket.on("message", async (message) => {
       const allMessages = await instance.get(
-        `/chat/all/${location.pathname.split("/").slice(1)[0]}`
+        `/chat/all/${location.pathname.split("/").slice(1)[0]}/${c_user._id}`
       );
       setMessages([...allMessages.data]);
     });
@@ -168,7 +168,7 @@ export default function GridView({ toggleRightSideBar, barState }) {
 
   const currentUser = async (user, group) => {
     setC_user(user);
-    await getAllMessages(id);
+    // await getAllMessages(id);
 
     if (group) {
       setGroupName(user);
@@ -181,11 +181,11 @@ export default function GridView({ toggleRightSideBar, barState }) {
       setGroupName("");
       setGroupMembers([]);
       setMessages([]);
-      const ourChat = allMyMessages.filter(
-        (message) =>
-          message.receiverId === user._id || message.senderId === user._id
-      );
-      setMessages([...ourChat]);
+      // const ourChat = allMyMessages.filter(
+      //   (message) =>
+      //     message.receiverId === user._id || message.senderId === user._id
+      // );
+      // setMessages([...ourChat]);
     }
 
     console.log(c_user);
